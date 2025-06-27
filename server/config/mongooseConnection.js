@@ -8,8 +8,8 @@ const proddbgr = debug("production:mongooseConnection");
 mongoose
     .connect(`${config.get("MONGO_URI")}/IWS`)
     .then(function () {
-        devdbgr('Connecteed')
-        proddbgr('Connecteed')
+        devdbgr('Connected')
+        proddbgr('Connected')
     })
     .catch(function (err) {
         proddbgr(err)
