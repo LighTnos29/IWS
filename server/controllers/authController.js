@@ -32,7 +32,7 @@ export const signup = async (req, res) => {
 
                     const token = generateToken(newUser);
                     res.cookie("token", token);
-                    res.status(200).json({ message: "User Created Successfully" });
+                    res.status(200).json({ message: "User Created Successfully", token });
                 } catch (dbErr) {
                     console.error("DB Error:", dbErr);
                     return res.status(500).json({ message: "Error saving user", error: dbErr });
@@ -71,3 +71,4 @@ export const signin = async (req, res) => {
         return res.status(400).json({ message: "Error signing , try again." })
     }
 }
+
