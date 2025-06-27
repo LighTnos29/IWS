@@ -72,3 +72,8 @@ export const signin = async (req, res) => {
     }
 }
 
+export const logout = async (req, res) => {
+    res.cookie("token", "")
+    res.send("Logout successful.")
+}
+
