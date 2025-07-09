@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-    productName: {
+    name: {
         type: String,
         trim: true,
         required: [true, 'Product name is required']
     },
-    productDesc: {
+    description: {
         type: String,
         trim: true
     },
@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    bestSeller: {
+    bestseller: {
         type: Boolean,
         required: false
     },

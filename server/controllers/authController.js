@@ -1,4 +1,3 @@
-import express from 'express'
 import userModel from '../models/userModel.js'
 import bcrypt from "bcrypt";
 import generateToken from '../utils/generateToken.js';
@@ -6,7 +5,6 @@ import generateToken from '../utils/generateToken.js';
 export const signup = async (req, res) => {
     try {
         const { name, email, password } = req.body;
-
         const user = await userModel.findOne({ email });
         if (user) return res.status(401).json({ message: "User already exists." });
 
@@ -71,7 +69,20 @@ export const signin = async (req, res) => {
         return res.status(400).json({ message: "Error signing , try again." })
     }
 }
+export const googleAuthCallback = async (req, res) => {
+  try {
+    // req.user is set by passport
+    const token = generateToken(req.user);
 
+    // optional: set as cookie for browser
+    res.cookie('token', token);
+
+    // Since you're backend-first: return JSON
+    res.json({ message: "Google login successful", token });
+  } catch (err) {
+    res.status(500).json({ message: "Google auth error", error: err.message });
+  }
+};
 export const logout = async (req, res) => {
     res.cookie("token", "")
     res.send("Logout successful.")
